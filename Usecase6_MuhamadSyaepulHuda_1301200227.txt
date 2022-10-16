@@ -1,0 +1,68 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `php`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_pegawai`
+--
+
+CREATE TABLE `data_pegawai` (
+  `id` int(20) NOT NULL,
+  `nama` varchar(20) NOT NULL,
+  `jabatan` varchar(30) NOT NULL,
+  `alamat` varchar(30) NOT NULL,
+  `no_tlp` decimal(30,0) NOT NULL,
+  `nama_istri` varchar(50) NOT NULL,
+  `nama_anak` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `data_pegawai`
+--
+
+INSERT INTO `data_pegawai` (`id`, `nama`, `jabatan`, `alamat`, `no_tlp`, `nama_istri`, `nama_anak`) VALUES
+(9, 'Silvi', 'Jatinangor', 'Sekretaris', '82127787593', 'Heryana', 'Dani'),
+(10, 'Ahmad Zaelani', 'Pangandaran', 'Web Programmer', '82127787593', 'Ulfa Zulfa', 'Harun'),
+(11, 'Zulfikar Nugraha', 'Bandung Barat', 'Auditor', '82127787593', 'Sinta', 'Lulu'),
+(12, 'Dudung', 'Sumatera', 'Web Developer', '85323456789', 'Amelia', 'Farhan'),
+(13, 'Wulandari', 'Jakarta', 'Bendahara', '82127787593', 'Rudi', 'Ridwan'),
+(14, 'Riki', 'Bogor', 'Web Designer', '82127787593', '-', '-'),
+(15, 'Dadang', 'Jakarta', 'Manager', '85223535055', 'Andini', 'Dani'),
+(16, 'Riki', 'Bogor', 'Bos', '82127787593', 'Amelia', 'Farhan'),
+(17, 'Anto Sihombing', 'Jatinangor', 'Manager', '82127787593', 'Ayu Sirayud', 'Dani'),
+(18, 'Ahmad Zaelani', 'Jakarta', 'Auditor', '82127787593', 'Amelia', 'Farhan'),
+(19, 'Didin Komarudin', 'Bogor', 'Bendahara', '85323456789', 'Ayu Sirayud', 'Dani');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `data_pegawai`
+--
+ALTER TABLE `data_pegawai`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `data_pegawai`
+--
+ALTER TABLE `data_pegawai`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
