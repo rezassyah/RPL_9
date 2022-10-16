@@ -1,0 +1,42 @@
+package usecase2;
+
+public class usecase2 {
+
+  public static void SignUp(emailEntry, pwdEntry, OTP) {
+    input(emailEntry);
+    input(pwdEntry);
+    if (emailEntry is valid) then {
+      while (emailEntry is used) do {
+        output("Email already used");
+      }
+      endwhile
+      if (emailEntry not used) then {
+        pass;
+      }
+      endif
+    } else {
+      output("Email invalid, use valid email");
+    }
+    endif
+    while (pwdEntry not valid) do {
+      output("Password invalid, use format");
+    }
+    endwhile
+    
+    Do case
+    Case OTP = email 
+      send OTP to emailEntry;
+    Case OTP = phone
+      send OTP to phoneNumber;
+    Case OTP = call
+      send OTP to call(phoneNumber);
+      
+    input(checkOTP)
+    Do case
+    Case checkOTP = OTP
+      save user to db
+      output("Registration successful")
+    Case checkOTP != OTP
+      output("Wrong OTP")
+  }
+}
