@@ -1,3 +1,2 @@
 # RPL
-Reza Syah Pahlevi Natanagara
-Naufal Adrian
+Reza Syah Pahlevi Natanagara - 1301204396
