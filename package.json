@@ -1,0 +1,26 @@
+{
+  "name": "rpl_9",
+  "version": "1.0.0",
+  "description": "Reza Syah Pahlevi Natanagara - 1301204396\\\r Naufal Adrian Hidayat - 1301204056\\\r Muhamad Syaepul Huda - 1301200227\\\r Fadli Zuhri   - 1301202613",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ini.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rezassyah/RPL_9.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rezassyah/RPL_9/issues"
+  },
+  "homepage": "https://github.com/rezassyah/RPL_9#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "knex": "^2.3.0",
+    "mysql": "^2.18.1"
+  }
+}
