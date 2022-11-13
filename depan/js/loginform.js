@@ -8,11 +8,10 @@ form.forEach((item, i) => {
     }, i*100)
 })
 
-//form vallidation
+//form validation
 
-const name = document.querySelector()
-const email = document.querySelector('.input-1') 
-const password = document.querySelector('.input-2') 
+const email = document.querySelector('.email') 
+const password = document.querySelector('.password') 
 const inbtn = document.querySelector('.btnin')
 
 inbtn.addEventListener('click', () => {

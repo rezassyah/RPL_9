@@ -1,18 +1,10 @@
 const express = require('express') //express.js 
 const path = require('path')
 const bodyParser = require ('body-parser') //parser
-const knex = require('knex') //db connection
 const app = express() //app using express
-const port = 3306
-const db = knex({
-    client: 'mysql',
-    connection: {
-        host: '127.0.0.1',
-        user: 'root',
-        password: '',
-        database: 'loginformytvideo'
-    }
-})
+const port = process.env.PORT || 5000
+const knex = require('./depan/js/database')
+const db = knex
 
 let initialPath = path.join(__dirname, './depan/') //path ke web
 
@@ -49,8 +41,8 @@ app.post('/register-user', (req,res) => {
         .then(data => {
             res.json(data[0])
         })
-        .catch(err => {
-            if(err.detail.includes('already exists')) {
+        .catch((err) => {
+            if(err.detail != undefined && err.detail.includes('already exists')) {
                 res.json('email already exists')
             }
         })

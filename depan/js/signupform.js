@@ -10,11 +10,11 @@ form.forEach((item, i) => {
 
 //form vallidation
 
-const name = document.querySelector('.input-1') 
-const merchant = document.querySelector('.input-2')
-const email = document.querySelector('.input-3') 
-const password = document.querySelector('.input-4')
-const rptpassword = document.querySelector('.input-5')
+const nama = document.querySelector('.name') 
+const merchant = document.querySelector('.merchant')
+const email = document.querySelector('.email') 
+const password = document.querySelector('.password')
+const rptpassword = document.querySelector('.rptpassword')
 const createbtn = document.querySelector('.btncreate')
 
 createbtn.addEventListener('click', () => {
@@ -22,7 +22,7 @@ createbtn.addEventListener('click', () => {
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify({
-            name: name.value,
+            name: nama.value,
             merchant: merchant.value,
             email: email.value,
             password: password.value,
