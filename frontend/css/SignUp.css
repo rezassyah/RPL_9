@@ -14,20 +14,26 @@
     padding-left: 200px;
   }
 
-  .bg{
+  .bg img{
     position: absolute;
-    bottom: -10px;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
     left: 0px;
+    z-index: -1;
   }
   
-  .bg2{
-    position: absolute;
+  .bg2 img{
+    position: fixed;
+    width: 70%;
+    height: 70%;
     top: 0px;
     right: 0px;
+    z-index: -1;
   }
 
   .img1{
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     left: 50px;
   }
@@ -40,6 +46,7 @@
   }
 
   #wrapper {
+    position: relative;
     width: 500px;
     height: 50%;
     overflow: hidden;
@@ -49,7 +56,7 @@
 
     
   }
-  .SignIn {
+  .SignUp {
     font-style: normal;
     padding-top: 0px;
     font-weight: 700;
@@ -91,7 +98,10 @@
   }
     
   .input-1, 
-  .input-2{
+  .input-2,
+  .input-3,
+  .input-4,
+  .input-5{
     width: 100%;
     margin-bottom: 10px;
     padding: 8px 12px;
@@ -111,7 +121,7 @@
     letter-spacing: -1px;
   }
   
-  .btnin {
+  .btncreate {
     width: 100%;
     background-color: #3897f0;
     border: 1px solid #3897f0;
@@ -123,15 +133,9 @@
     margin-top: 1px;
   }
 
-  .btnin a {
-    text-decoration: none;
-    color: #fff;
-  }
-
-  .btnin:hover {
+  .btncreate:hover {
     background-color: #3897f0ca;
   }
-
   
   .sub-content {
     width: 250px;
