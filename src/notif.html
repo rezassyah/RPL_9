@@ -13,16 +13,16 @@
 </head>
 <body>
     <div class="bg">
-        <img src="/elemen/Ellipseblue1.png" alt="bg1">
+        <img src="./elemen/Ellipseblue1.png" alt="bg1">
     </div> 
     <div class="bg2">
-        <img src="/elemen/Elipsblue2.png" alt="bg2">
+        <img src="./elemen/Elipsblue2.png" alt="bg2">
     </div>
     <nav class="sidebar close">
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="logo.png" alt="">
+                    <img src="./elemen/logo.png" alt="">
                 </span>
 
                 <div class="text logo-text">
@@ -38,7 +38,7 @@
             <div class="menu">
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="/Dashboard.html" clas>
+                        <a href="./dashboard.html" clas>
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text nav-text" >Dashboard</span>
                         </a>
@@ -52,14 +52,14 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="/pendapatan.html">
+                        <a href="./pendapatan.html">
                             <i class='bx bx-bar-chart-alt-2 icon'></i>
                             <span class="text nav-text">Pendapatan</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="/Stock.html">
+                        <a href="./stock.html">
                             <i class='bx bx-package icon' ></i>
                             <span class="text nav-text">Stok Barang</span>
                         </a>
@@ -75,7 +75,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="/Login.html">
+                    <a href="./login.html">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -90,34 +90,7 @@
         <div class="text">Notifikasi</div>
     </section>
 
-    <script>
-        const body = document.querySelector('body'),
-      sidebar = body.querySelector('nav'),
-      toggle = body.querySelector(".toggle"),
-      searchBtn = body.querySelector(".search-box"),
-      modeSwitch = body.querySelector(".toggle-switch"),
-      modeText = body.querySelector(".mode-text");
-
-
-toggle.addEventListener("click" , () =>{
-    sidebar.classList.toggle("close");
-})
-
-searchBtn.addEventListener("click" , () =>{
-    sidebar.classList.remove("close");
-})
-
-modeSwitch.addEventListener("click" , () =>{
-    body.classList.toggle("dark");
-    
-    if(body.classList.contains("dark")){
-        modeText.innerText = "Light mode";
-    }else{
-        modeText.innerText = "Dark mode";
-        
-    }
-});
-    </script>
+    <script src="./js/notif.js"></script>
 
 </body>
 </html>

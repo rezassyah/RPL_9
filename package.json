@@ -4,7 +4,7 @@
   "description": "Reza Syah Pahlevi Natanagara - 1301204396\\\r Naufal Adrian Hidayat - 1301204056\\\r Muhamad Syaepul Huda - 1301200227\\\r Fadli Zuhri   - 1301202613",
   "main": "index.js",
   "scripts": {
-    "start": "node ini.js",
+    "start": "node ./config/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
