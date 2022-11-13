@@ -3,27 +3,30 @@
 <head>
 	<title>Cashy</title>
 
-    <link rel="stylesheet" href="./css/SignUp.css">
+    <link rel="stylesheet" href="./css/signup.css">
 </head>
 <body>
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Overpass+Mono" rel="stylesheet">
     <div class="bg">
-        <img src="/elemen/Ellipseblue1.png" alt="bg1">
+        <img src="./elemen/Ellipseblue1.png" alt="bg1">
     </div>
     <div class="bg2">
-        <img src="/elemen/Elipsblue2.png" alt="bg2">
+        <img src="./elemen/Elipsblue2.png" alt="bg2">
     </div>
     <div class="img1">
-        <img src="/elemen/logokiri.png" alt="logokiri">
+        <img src="./elemen/logokiri.png" alt="logokiri">
     </div>
     <div class="img2">
-        <img src="/elemen/logokanan.png" alt="logokanan">
+        <img src="./elemen/logokanan.png" alt="logokanan">
     </div>
     <div id="wrapper">
         <div class="gambar">
-            <img src="/elemen/brand_logo.png" alt="Logo">
+            <img src="./elemen/brand_logo.png" alt="Logo">
         </div>
     </div>    
+    <div class="alert-box">
+        <p class="alert"></p>
+    </div>
     <div class="main-content">
         <div class="SignUp">
             Buat Akun
@@ -32,27 +35,29 @@
             Enter your credentials to continue
         </div>
         <div>
-            <input type="text" placeholder="Nama" class="input-1" />
+            <input type="text" placeholder="Nama" class="name" />
         </div>
         <div>
-            <input type="text" placeholder="Nama Merchan" class="input-2" />
+            <input type="text" placeholder="Nama Merchant" class="merchant" />
         </div>
         <div>
-            <input type="email" placeholder="Email" class="input-3" />
+            <input type="email" placeholder="Email" class="email" />
         </div>
         <div>
-            <input type="password" placeholder="Password" class="input-4" />
+            <input type="password" placeholder="Password" class="password" />
         </div>
         <div>
-            <input type="password" placeholder="Ulangi Password" class="input-5" />
+            <input type="password" placeholder="Ulangi Password" class="rptpassword" />
         </div>
-            <input type="button" value="Buat Akun" onclick="location.href='/LogIn.html';" class="btncreate">
+            <input type="button" value="Buat Akun" onclick="location.href='/login.html';" class="btncreate">
             <div class="Smalltext1">
-                Sudah punya akun?<a href="/Login.html"> Masuk</a>
+                Sudah punya akun?<a href="./login.html"> Masuk</a>
             </div>
         </div>
 
     </div>
     
+    <script src="./js/signupform.js"></script>
+
 </body>
 </html>
