@@ -11,7 +11,8 @@ New style include new structure, structures you need to know :
 - src --> source codes folder, all js html and css are inside within each respective folder
 - node_modules --> node.js modules folder, if not present in branch, means you need to install in your own local
 - config --> config folder, for config js files such as index.js or server.js
-- files --> use lowercase for all file names, use `-` or `_` if needed\
+- files --> use lowercase for all file names, use `-` or `_` if needed
+
 \
 \
 To access the site by code, run npm in terminal with `npm run start` \
