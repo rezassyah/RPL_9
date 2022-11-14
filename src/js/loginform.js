@@ -8,6 +8,12 @@ form.forEach((item, i) => {
     }, i*100)
 })
 
+window.onload = () => {
+    if(sessionStorage.name){
+        location.href = '/';
+    }
+}
+
 //form validation
 
 const email = document.querySelector('.email') 
@@ -38,7 +44,7 @@ const validateData = (data) => {
         alertBox(data)
     } else {
         sessionStorage.email = data.email
-        location.href = './'
+        location.href = '../dashboard.html'
     }
 }
 
