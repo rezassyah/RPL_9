@@ -2,7 +2,7 @@ const express = require('express') //express.js
 const path = require('path')
 const bodyParser = require('body-parser') //parser
 const app = express() //app using express
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5500
 const knex = require('../src/js/database.js')
 const db = knex
 
@@ -63,9 +63,9 @@ app.post('/register-user', (req, res) => {
     } else if (!rptpassword.match(password)) {
         res.json('password not match')
     } else {
-        db("users").insert({
-            name: name,
-            merchant: merchant,
+        db("db_user").insert({
+            nama: name,
+            namaMerchant: merchant,
             email: email,
             password: password
         })
@@ -83,7 +83,7 @@ app.post('/register-user', (req, res) => {
 app.post('/login-user', (req, res) => {
     const { email, password } = req.body
     db.select('email', 'password')
-        .from('users')
+        .from('db_user')
         .where({
             email: email,
             password: password
