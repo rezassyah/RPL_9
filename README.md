@@ -13,6 +13,7 @@ New style include new structure, structures you need to know :
 - config --> config folder, for config js files such as index.js or server.js
 - files --> use lowercase for all file names, use `-` or `_` if needed
 \
+\
 To access the site by code, run npm in terminal with `npm run start` \
 **NOTE THAT SITE WON'T RUN WITHOUT .ENV FILE WHICH IS POINTER TO DATABASE**
 \
