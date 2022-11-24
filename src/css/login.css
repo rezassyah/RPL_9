@@ -1,0 +1,196 @@
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Inter;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  body {
+    background-color: #fff;
+  }
+
+  .Brandlogo{
+    position: absolute;
+    top: 90px;
+    padding-left: 200px;
+  }
+
+  .bg img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1;
+  }
+  
+  .bg2 img{
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 0px;
+    right: 0px;
+    z-index: -1;
+  }
+
+  .img1{
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+  }
+
+  .img2{
+    position: absolute;
+    height: 224px;
+    bottom: 30px;
+    right: 50px;
+  }
+
+  #wrapper {
+    width: 500px;
+    height: 50%;
+    overflow: hidden;
+    margin: 50px auto;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 0px;
+
+    
+  }
+  .SignIn {
+    font-style: normal;
+    padding-top: 0px;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    color: #1698D3;
+  }
+
+  .gambar{
+    padding-left: 100px;
+  }
+
+  .Smalltext1 {
+    font-style: normal;
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 1px;
+    padding-bottom: 10px;
+
+    color: #000000;
+  }
+
+  .Smalltext1 a{
+    text-decoration: none;
+  }
+  
+  
+
+  .main-content {
+    width: 250px;
+    height: 40%;
+    margin: 10px auto;
+    padding: 20px 50px;
+
+    background: #FFFFFF;
+    border: 2px solid #29A6DF;
+    border-radius: 18px;
+  }
+    
+  .email, 
+  .password{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border: 1px solid #29A6DF;
+    box-sizing: border-box;
+    border-radius: 10px; 
+  }
+  
+  .overlap-text {
+    position: relative;
+  }
+  
+
+  .overlap-text a {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #551a8b;
+    
+  }
+  
+  .btnin {
+    width: 100%;
+    background-color: #3897f0;
+    border: 1px solid #3897f0;
+    padding: 5px 12px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 1px;
+  }
+
+  .btnin a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .btnin:hover {
+    background-color: #3897f0ca;
+  }
+
+  
+  .sub-content {
+    width: 250px;
+    height: 40%;
+    margin: 10px auto;
+    border: 1px solid #e6e6e6;
+    padding: 20px 50px;
+    background-color: #fff;
+  }
+  
+  .s-part {
+    text-align: center;
+    font-family: 'Overpass Mono', monospace;
+    word-spacing: -3px;
+    letter-spacing: -2px;
+    font-weight: normal;
+  }
+  
+  .s-part a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #3897f0;
+    font-family: 'Overpass Mono', monospace;
+    word-spacing: -3px;
+    letter-spacing: -2px;
+    font-weight: normal;
+  }
+  
+  input:focus {
+      background-color: rgb(237, 237, 237);
+  }
+
+  .alert-box{
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 150px;
+    max-width: 90%;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    text-transform: capitalize;
+    background: rgb(255, 119, 119);
+    border-top: 10px solid rgb(255, 37, 37);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #fff;
+    font-family: 'roboto', sans-serif;
+    text-align: center;
+    transition: 1s;
+}
