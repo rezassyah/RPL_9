@@ -3,57 +3,89 @@ const path = require('path')
 const bodyParser = require('body-parser') //parser
 const app = express() //app using express
 const port = process.env.PORT || 5500
-const knex = require('../src/js/database.js')
-const db = knex
+const cors = require('cors')
+const { db } = require('../src/js/database.js')
 
 let initialPath = path.join(__dirname, '../src/') //path ke web
 
-app.use(bodyParser.json())
+app.use(cors());
+app.use(express.json())
+app.use(bodyParser.urlencoded({extended : true}))
 app.use(express.static(initialPath, { index: 'login.html' })) //default open login html
 
 app.get('/', (req, res) => { //default link
     res.status(200).sendFile(path.join(initialPath, 'login.html'));
 }) 
 
-app.get('/changepw', (req, res) => { //link to changepw
-    res.status(200).sendFile(path.join(initialPath, 'changepw.html'))
-}) 
+app.get('/api/readData', (req,res)=>{
+    const sqlQuery = "select * from db_user"
+    db.query(sqlQuery, (err, result) =>{
+        if (err) throw err
 
-app.get('/dashboard', (req, res) => { //link to dashboard
-    res.status(200).sendFile(path.join(initialPath, 'dashboard.html'))
-}) 
+        res.send(result)
+        console.log(result``)
+    })
+})
 
-app.get('/forgot-veryf', (req, res) => { //link to forgot-veryf
-    res.status(200).sendFile(path.join(initialPath, 'forgot-veryf.html'))
-}) 
+app.get('/api/readUser/:email', (req,res) => {
+    const userEmail = req.params.email
+    const sqlQuery = "select * from db_user where email = ?"
+    db.query(sqlQuery, userEmail, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.send(result)
+            console.log(result)
+        }
+    })
+})
 
-app.get('/forgot', (req, res) => { //link to forgot
-    res.status(200).sendFile(path.join(initialPath, 'forgot.html'))
-}) 
+app.post('/api/createUser', (req, res) => {
+    const { name, merchant, email, password, rptpassword } = req.body
+    if (!name.length || !email.length || !merchant.length || !password.length || !rptpassword.length) {
+        res.json('fill all the fields')
+    } else if (!rptpassword.match(password)) {
+        res.json('password not match')
+    } else {
+        
+        const sqlQuery = "insert ignore into db_user (nama, namaMerchant, email, password) value (?, ?, ?, ?)"
+        db.query(sqlQuery, [name, merchant, email, password], (err, result) => {
+            if (err) {
+                res.json(err)
+            } else {
+                res.send(result)
+                console.log(result)
+            }
+        })
+    }
+})
 
-app.get('/kasir', (req, res) => { //link to kasir
-    res.status(200).sendFile(path.join(initialPath, 'kasir.html'))
-}) 
+app.put('/api/updateUser', (req,res) => {
+    const userName = req.body.nama
+    const userMerchant = req.body.namaMerchant
+    const userPassword = req.body.password
+    const userEmail = req.body.email
 
-app.get('/login', (req, res) => { //link to login
-    res.status(200).sendFile(path.join(initialPath, 'login.html'))
-}) 
+    const sqlQuery = "update db_user set nama = ?, password = ?, namaMerchant = ? where email = ?"
+    db.query(sqlQuery, [userName,userPassword, userMerchant,userEmail], (err, result) => {
+        if (err) throw err
 
-app.get('/notif', (req, res) => { //link to notif
+        res.send(result)
+        console.log(result)
+    })
+})
 
-    res.status(200).sendFile(path.join(initialPath, 'notif.html'))
-}) 
-app.get('/pendapatan', (req, res) => { //link to pendapatan
-    res.status(200).sendFile(path.join(initialPath, 'pendapatan.html'))
-}) 
+app.delete('/api/deleteUser', (req,res) => {
+    const userId = req.body.id_user
 
-app.get('/signup', (req, res) => { //link to signup
-    res.status(200).sendFile(path.join(initialPath, 'signup.html'))
-}) 
+    const sqlQuery = "delete from db_user where id_user = ?"
+    db.query(sqlQuery, userId, (err, result) => {
+        if (err) throw err
 
-app.get('/stock', (req, res) => { //link to stock
-    res.status(200).sendFile(path.join(initialPath, 'stock.html'))
-}) 
+        res.send(result)
+        console.log(result)
+    })
+})
 
 app.post('/register-user', (req, res) => {
     const { name, merchant, email, password, rptpassword } = req.body
@@ -80,6 +112,7 @@ app.post('/register-user', (req, res) => {
             })
     }
 })
+
 app.post('/login-user', (req, res) => {
     const { email, password } = req.body
     db.select('email', 'password')

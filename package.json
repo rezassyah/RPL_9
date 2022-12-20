@@ -4,7 +4,7 @@
   "description": "Reza Syah Pahlevi Natanagara - 1301204396\\\r Naufal Adrian Hidayat - 1301204056\\\r Muhamad Syaepul Huda - 1301200227\\\r Fadli Zuhri   - 1301202613",
   "main": "index.js",
   "scripts": {
-    "start": "node ./config/server.js",
+    "start": "nodemon ./config/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/rezassyah/RPL_9#readme",
   "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "knex": "^2.3.0",
     "mysql": "^2.18.1",
-    "mysql2": "^2.3.3",
-    "sqlite3": "^5.1.2"
+    "nodemon": "^2.0.20"
   }
 }
