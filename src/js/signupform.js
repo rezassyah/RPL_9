@@ -18,7 +18,7 @@ const rptpassword = document.querySelector('.rptpassword')
 const createbtn = document.querySelector('.btncreate')
 
 createbtn.addEventListener('click', () => {
-    fetch('/register-user', {
+    fetch('/api/createUser', {
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify({
