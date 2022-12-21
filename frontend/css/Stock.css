@@ -304,3 +304,12 @@ body.dark .switch::before{
     justify-content: center!important;
     font-size: 20px!important;
 }
+
+table {
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+  }

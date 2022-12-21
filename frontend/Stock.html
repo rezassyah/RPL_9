@@ -88,9 +88,35 @@
 
     <section class="home">
         <div class="text">Stok Barang</div>
+            <div class="box-wrapper">
+                <div class="container">
+                    <div id="b1">
+                        <table>
+                            <thead>
+                              <tr>
+                                <th>Nama Barang</th>
+                                <th>Jumlah Stok</th>
+                                <th>Aksi</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tbody-barang">
+                              <!-- baris-baris untuk menampilkan stok barang akan ditambahkan di sini -->
+                            </tbody>
+                          </table>
+                          <form>
+                            <label for="nama-barang">Nama Barang:</label>
+                            <input type="text" id="nama-barang" />
+                            <label for="jumlah-stok">Jumlah Stok:</label>
+                            <input type="number" id="jumlah-stok" />
+                            <button type="button" id="tambah-barang-btn">Tambah</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
     </section>
 
     <script>
+<<<<<<< Updated upstream:frontend/Stock.html
         const body = document.querySelector('body'),
       sidebar = body.querySelector('nav'),
       toggle = body.querySelector(".toggle"),
@@ -116,6 +142,55 @@ modeSwitch.addEventListener("click" , () =>{
         modeText.innerText = "Dark mode";
         
     }
+=======
+        // Ambil elemen-elemen yang dibutuhkan
+const tbodyBarang = document.getElementById('tbody-barang');
+const tambahBarangBtn = document.getElementById('tambah-barang-btn');
+const namaBarangInput = document.getElementById('nama-barang');
+const jumlahStokInput = document.getElementById('jumlah-stok');
+
+// Fungsi untuk menambahkan baris baru ke tabel stok barang
+function tambahBarisBarang(nama, jumlah) {
+  // Buat elemen tr baru
+  const trBaru = document.createElement('tr');
+
+  // Buat elemen td baru untuk nama barang dan jumlah stok
+  const tdNama = document.createElement('td');
+  tdNama.textContent = nama;
+  const tdJumlah = document.createElement('td');
+  tdJumlah.textContent = jumlah;
+
+  // Buat elemen td baru untuk tombol hapus
+  const tdAksi = document.createElement('td');
+  const hapusBtn = document.createElement('button');
+  hapusBtn.textContent = 'Hapus';
+  hapusBtn.addEventListener('click', function () {
+    trBaru.remove();
+  });
+  tdAksi.appendChild(hapusBtn);
+
+  // Tambahkan elemen td ke elemen tr
+  trBaru.appendChild(tdNama);
+  trBaru.appendChild(tdJumlah);
+  trBaru.appendChild(tdAksi);
+
+  // Tambahkan elemen tr ke tbody tabel
+  tbodyBarang.appendChild(trBaru);
+}
+
+// Tambahkan event listener untuk tombol tambah
+tambahBarangBtn.addEventListener('click', function () {
+  // Ambil nilai dari input nama barang dan jumlah stok
+  const nama = namaBarangInput.value;
+  const jumlah = jumlahStokInput.value;
+
+  // Tambahkan baris baru ke tabel
+  tambahBarisBarang(nama, jumlah);
+
+  // Kosongkan input nama barang dan jumlah stok
+  namaBarangInput.value = '';
+  jumlahStokInput.value = '';
+>>>>>>> Stashed changes:src/stock.html
 });
     </script>
 

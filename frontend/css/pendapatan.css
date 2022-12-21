@@ -304,3 +304,114 @@ body.dark .switch::before{
     justify-content: center!important;
     font-size: 20px!important;
 }
+<<<<<<< Updated upstream:frontend/css/pendapatan.css
+=======
+
+.box-wrapper {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+.container {
+    padding: 10px;
+    flex-grow: 1;
+    display: flex;
+    padding-left: 70px;
+    flex-direction: row;
+}
+
+#b1 {
+    width: 500px;
+    height: 500px;
+    background-color: rgba(249, 249, 249, 0.559);
+    padding: 15px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.152);
+    border-radius: 20px;
+}
+
+#b2{
+    width: 610px;
+    height: 200px;
+    margin-left: 50px;
+    background-color: rgba(249, 249, 249, 0.559);
+    padding: 15px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.152);
+}
+
+#b3{
+    width: 610px;
+    height: 200px;
+    margin-left: 50px;
+    background-color: rgba(249, 249, 249, 0.559);
+    padding: 15px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.152);
+}
+
+.middle-column {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.middle-column div {
+    flex-grow: 1;
+    margin: 0 8px;
+    border-radius: 20px;
+}
+
+.middle-column div+div {
+    margin-top: 9px;
+}
+
+table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  td, th {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-family: Arial, sans-serif;
+    color: #707070;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  #search-input {
+    border-radius: 5px;
+    border-color: #1698D3;
+    width: 250px;
+    height: 25px;
+  }
+  
+  button {
+    background-color: #1698D3;
+    border: none;
+    color: white;
+    padding: 3px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    transition: all 0.5s;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  
+  button:hover {
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 8px 22px 0 rgba(0,0,0,0.19);
+  }
+  
+  #stock {
+    border: none;
+  }
+>>>>>>> Stashed changes:src/css/dashboard.css

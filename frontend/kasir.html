@@ -88,8 +88,36 @@
 
     <section class="home">
         <div class="text">Kasir</div>
-    </section>
+        <form>
+            <label for="kode_barang">Masukkan Kode Barang:</label><br>
+            <input type="text" id="kode_barang" name="kode_barang"><br>
+            <button type="submit">Tambahkan</button>
+          </form> 
+          <div class="container">
+            <!-- Tampilkan daftar barang yang telah ditambahkan di sini -->
+            <table>
+              <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Harga</th>
+              </tr>
+              <!-- Baris tabel untuk menampilkan informasi barang akan ditambahkan di sini -->
+            </table>
+            <!-- Tampilkan total harga di sini -->
+            <p>Total harga: Rp. <span id="total_harga">0</span></p>
+            <form>
+              <label for="uang_bayar">Masukkan Jumlah Uang:</label><br>
+              <input type="number" id="uang_bayar" name="uang_bayar"><br>
+              <button type="submit">Bayar</button>
+            </form>
+            <!-- Tampilkan jumlah kembalian di sini -->
+            <p>Kembalian: Rp. <span id="kembalian">0</span></p>
+          
+          <script>
+            // Variabel global untuk menyimpan total harga
+var totalHarga = 0;
 
+<<<<<<< Updated upstream:frontend/kasir.html
     <script>
         const body = document.querySelector('body'),
       sidebar = body.querySelector('nav'),
@@ -118,6 +146,58 @@ modeSwitch.addEventListener("click" , () =>{
     }
 });
     </script>
+=======
+// Fungsi untuk mengolah input kode barang dan menampilkan harga barang
+function tambahkanBarang() {
+  // Ambil input kode barang dari form
+  var kodeBarang = document.getElementById("kode_barang").value;
+
+  // Cek kode barang yang dimasukkan
+  if (kodeBarang == "BRG001") {
+    // Jika kode barang sesuai, tambahkan harga barang ke total harga
+    totalHarga += 10000;
+    // Tampilkan informasi barang di dalam tabel
+    var barisTabel = document.createElement("tr");
+    barisTabel.innerHTML = "<td>BRG001</td><td>Barang 1</td><td>Rp. 10.000</td>";
+    document.querySelector("table").appendChild(barisTabel);
+    // Update total harga di dalam element dengan id "total_harga"
+    document.getElementById("total_harga").innerHTML = totalHarga;
+  } else if (kodeBarang == "BRG002") {
+    // Jika kode barang sesuai, tambahkan harga barang ke total harga
+    totalHarga += 20000;
+    // Tampilkan informasi barang di dalam tabel
+    var barisTabel = document.createElement("tr");
+    barisTabel.innerHTML = "<td>BRG002</td><td>Barang 2</td><td>Rp. 20.000</td>";
+    document.querySelector("table").appendChild(barisTabel);
+    // Update total harga di dalam element dengan id "total_harga"
+    document.getElementById("total_harga").innerHTML = totalHarga;
+  } else {
+    // Jika kode barang tidak sesuai, tampilkan pesan error
+    document.querySelector(".container").innerHTML = "Kode barang tidak ditemukan";
+  }
+
+  // Hentikan form dari terkirim
+  return false;
+}
+
+// Tambahkan event listener pada tombol submit form untuk memanggil fungsi tambahkanBarang
+document.querySelector("button[type='submit']").addEventListener("click", tambahkanBarang);
+            // Fungsi untuk menghitung kembalian setelah pembayaran
+function hitungKembalian() {
+  // Ambil jumlah uang yang dibayarkan dari form
+  var uangBayar = document.getElementById("uang_bayar").value;
+
+  // Hitung kembalian
+  var kembalian = uangBayar - totalHarga;
+
+  // Tampilkan kembalian di dalam element dengan id "kembalian"
+  document.getElementById("kembalian").innerHTML = kembalian;
+}
+
+// Tambahkan event listener pada tombol submit form untuk memanggil fungsi hitungKembalian
+document.querySelector("button[type='submit']").addEventListener("click", hitungKembalian);
+          </script>
+>>>>>>> Stashed changes:src/kasir.html
 
 </body>
 </html>

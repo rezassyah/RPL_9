@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="./css/pendapatan.css">
     
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
     
     <title>Kasir Cashy</title> 
 </head>
@@ -88,6 +91,60 @@
 
     <section class="home">
         <div class="text">Laporan Pendapatan</div>
+
+        <div class="container">
+            <!-- Tambahkan form input untuk mengambil input tanggal dari pengguna -->
+            <form action="#" method="post">
+                <label for="start-date">Mulai tanggal:</label>
+                <input type="date" id="start-date" name="start-date">
+                <label for="end-date">Sampai tanggal:</label>
+                <input type="date" id="end-date" name="end-date">
+                <input type="submit" value="Tampilkan">
+            </form>
+            
+            <!-- Tambahkan tabel untuk menampilkan data pendapatan -->
+            <table style="width: 100%; border: 1px solid black;">
+              <tr>
+                <th style="border: 1px solid black;">Tanggal</th>
+                <th style="border: 1px solid black;">Jumlah Pendapatan</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black;">1 Januari 2022</td>
+                <td style="border: 1px solid black;">Rp. 10.000.000</td>
+              </tr>
+              <!-- Tambahkan baris lain untuk menampilkan data pendapatan lainnya -->
+            </table>
+            
+            <!-- Tambahkan grafik untuk menampilkan data pendapatan secara visual -->
+            <canvas id="income-chart"></canvas>
+            <script>
+                // Tambahkan kode JavaScript untuk menampilkan grafik menggunakan Chart.js
+                var ctx = document.getElementById('income-chart').getContext('2d');
+                var incomeChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+                        datasets: [{
+                            label: 'Pendapatan (Rp)',
+                            data: [10000000, 12000000, 13000000, 15000000, 14000000, 13000000, 12000000, 11000000, 10000000, 11000000, 12000000, 13000000],
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderWidth: 1
+                            }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+            </script>
+        </div>
+
     </section>
 
     <script>
