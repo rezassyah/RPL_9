@@ -1,5 +1,6 @@
 const express = require('express') //express.js 
 const path = require('path')
+const session = require('express-session');
 const bodyParser = require('body-parser') //parser
 const app = express() //app using express
 const port = process.env.PORT || 5500
@@ -12,6 +13,16 @@ app.use(cors());
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(express.static(initialPath, { index: 'login.html' })) //default open login html
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'secret',
+    name: 'secretName',
+    cookie: {
+        sameSite: true,
+        maxAge: 60000
+    },
+}))
 
 app.get('/', (req, res) => { //default link
     res.status(200).sendFile(path.join(initialPath, 'login.html'));
@@ -27,16 +38,25 @@ app.get('/api/readData', (req,res)=>{
     })
 })
 
-app.get('/api/readUser/:email', (req,res) => {
-    const userEmail = req.params.email
-    const sqlQuery = "select * from db_user where email = ?"
-    db.query(sqlQuery, userEmail, (err, result) => {
+app.get('/api/readUser/', (req,res) => {
+    const userEmail = req.body.email
+    const userPassword = req.body.password
+    const sqlQuery = "select * from db_user where email = ? and password = ?"
+    if (!userEmail && !userPassword) {
+        res.json("fill in all the fields")
+        res.end()
+    }
+    db.query(sqlQuery, [userEmail, userPassword], (err, result) => {
         if (err) {
             res.json(err)
         } else {
+            if (res.length > 0) {
+                
+            }
             res.send(result)
             console.log(result)
         }
+        
     })
 })
 
@@ -129,6 +149,7 @@ app.post('/login-user', (req, res) => {
             }
         })
 })
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
