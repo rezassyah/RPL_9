@@ -366,3 +366,11 @@ body.dark .switch::before{
 .middle-column div+div {
     margin-top: 10px
 }
+
+#myChart {
+    padding: 5px 20px 5px 15px;
+}
+
+#income-chart {
+    padding: 5px 20px 35px 15px;
+}
