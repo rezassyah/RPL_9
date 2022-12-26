@@ -90,13 +90,18 @@ var chart = new Chart(ctx, {
     },
     // Opsi yang akan diterapkan pada chart
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+      maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false,
+            min: 0,
+            stepSize: 1000000
+          }
+        }]
+      }
+      
     }
 });
 
