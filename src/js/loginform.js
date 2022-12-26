@@ -25,7 +25,6 @@ inbtn.addEventListener('click', () => {
     .then(res => res.json())
     .then(data => {
         validateData(data) //kalo udah ada database
-        location.href = '../dashboard.html'
     })
 })
 
