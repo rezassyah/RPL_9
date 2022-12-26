@@ -32,13 +32,10 @@ createbtn.addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             if (data.acknowledged) {
-                alert('register successful')
-                location.href = '../login.html'
-            } else if (!data.acknowledged) {
-                alertBox("register unsuccessful, data exist")
+                alertBox('register successful')
                 location.href = '../login.html'
             } else {
-                alertBox(data)
+                return alertBox(data)
             }
         })
 })

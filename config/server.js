@@ -36,25 +36,26 @@ app.get('/api/readData', (req, res) => {
     db.collection('users')
         .find({})
         .toArray((err, result) => {
-            if (err) throw err;
+            if (err) {
+                return res.json(err);
+            }
             res.send(result);
             console.log(result);
         });
 });
 
-app.get('/api/readUser/', (req, res) => {
-    const userEmail = req.body.email;
-    const userPassword = req.body.password;
+app.get('/api/readUser', (req, res) => {
+    const userEmail = req.query.email;
+    const userPassword = req.query.password;
     if (!userEmail && !userPassword) {
-        res.json({ message: 'fill in all the fields' });
-        res.end();
+        return res.json('fill in all the fields');
     }
     // Find a user with the specified email and password in the "users" collection
     db.collection('users').findOne(
         { email: userEmail, password: userPassword },
         (err, result) => {
             if (err) {
-                res.json({ message: err });
+                res.json(err);
             } else {
                 if (res.length > 0) {
                 }
@@ -65,26 +66,27 @@ app.get('/api/readUser/', (req, res) => {
     );
 });
 
+
 app.post('/api/createUser', (req, res) => {
     const { name, merchant, email, password, rptpassword } = req.body;
+    // Insert the new user into the "users" collection
     if (!name.length || !email.length || !merchant.length || !password.length || !rptpassword.length) {
-        res.json('fill all the fields');
-    } else if (!rptpassword.match(password)) {
-        res.json('password not match' );
-    } else {
-        // Insert the new user into the "users" collection
-        db.collection('users').insertOne(
-            { name, merchant, email, password },
-            (err, result) => {
-                if (err) {
-                    res.json(err);
-                } else {
-                    res.send(result);
-                    console.log(result);
-                }
-            }
-        );
+        return res.json('fill in all the fields');
     }
+    if (!rptpassword.match(password)) {
+        return res.json('password not match');
+    }
+    db.collection('users').insertOne(
+        { name, merchant, email, password },
+        (err, result) => {
+            if (err) {
+                res.json(err);
+            } else {
+                res.send(result);
+                console.log(result);
+            }
+        }
+    );
 });
 
 app.put('/api/updateUser', (req, res) => {
@@ -103,7 +105,9 @@ app.put('/api/updateUser', (req, res) => {
             },
         },
         (err, result) => {
-            if (err) throw err;
+            if (err) {
+                return res.json(err);
+            }
             res.send(result);
             console.log(result);
         }
@@ -115,7 +119,9 @@ app.delete('/api/deleteUser', (req, res) => {
     const userEmail = req.body.email;
     // Delete the user with the specified email from the "users" collection
     db.collection('users').deleteOne({ email: userEmail }, (err, result) => {
-        if (err) throw err;
+        if (err) {
+            return res.json(err);
+        }
         res.send(result);
         console.log(result);
     });

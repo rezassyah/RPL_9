@@ -8,11 +8,6 @@ form.forEach((item, i) => {
     }, i*100)
 })
 
-window.onload = () => {
-    if(sessionStorage.name){
-        location.href = '/';
-    }
-}
 
 //form validation
 
@@ -21,24 +16,19 @@ const password = document.querySelector('.password')
 const inbtn = document.querySelector('.btnin')
 
 inbtn.addEventListener('click', () => {
-    fetch('/login-user', {
-        method: 'post',
-        headers: new Headers({'Content-Type':'application/json'}),
-        body: JSON.stringify({
-            email: email.value,
-            password: password.value
-        })
+    const email = document.querySelector('.email').value;
+    const password = document.querySelector('.password').value;
+    fetch(`/api/readUser?email=${email}&password=${password}`, {
+        method: 'get',
+        headers: new Headers({'Content-Type':'application/json'})
     })
     .then(res => res.json())
     .then(data => {
-//        if(data.name) {
-//            alert('login successful')
-//        } else {
-//            alert(data)
-//        }
         validateData(data) //kalo udah ada database
+        location.href = '../dashboard.html'
     })
 })
+
 const validateData = (data) => {
     if(!data.email) {
         alertBox(data)
