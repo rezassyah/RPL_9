@@ -31,6 +31,54 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(initialPath, 'login.html'));
 });
 
+app.post('/api/login', (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.json('fill in all the fields');
+    }
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(email)) {
+        return res.json('invalid email, insert real email address');
+    }
+    // Find a user with the specified email and password in the "users" collection
+    db.collection('users').findOne(
+        { email, password },
+        (err, result) => {
+            if (err) {
+                res.json(err);
+            } else {
+                if (result) {
+                    // If a user is found, set a session variable with the user's email
+                    req.session.email = email;
+                    res.send(result);
+                } else {
+                    // If no user is found, return an error message
+                    res.json('Invalid email or password');
+                }
+            }
+        }
+    );
+});
+
+app.get('/api/checkSession', (req, res) => {
+    if (req.session.email) {
+        res.json({ loggedIn: true });
+    } else {
+        res.json({ loggedIn: false });
+    }
+});
+
+app.post('/api/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json({ loggedOut: true });
+        }
+    });
+});
+
+
 app.get('/api/readData', (req, res) => {
     // Find all documents in the "users" collection
     db.collection('users')
@@ -47,7 +95,7 @@ app.get('/api/readData', (req, res) => {
 app.get('/api/readUser', (req, res) => {
     const userEmail = req.query.email;
     const userPassword = req.query.password;
-    if (!userEmail && !userPassword) {
+    if (!userEmail || !userPassword) {
         return res.json('fill in all the fields');
     }
     // Find a user with the specified email and password in the "users" collection
@@ -66,7 +114,6 @@ app.get('/api/readUser', (req, res) => {
     );
 });
 
-
 app.post('/api/createUser', (req, res) => {
     const { name, merchant, email, password, rptpassword } = req.body;
     // Insert the new user into the "users" collection
@@ -75,6 +122,10 @@ app.post('/api/createUser', (req, res) => {
     }
     if (!rptpassword.match(password)) {
         return res.json('password not match');
+    }
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(email)) {
+        return res.json('invalid email, insert real email address');
     }
     db.collection('users').insertOne(
         { name, merchant, email, password },
