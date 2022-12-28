@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5500;
 const cors = require('cors');
-const { client } = require('../src/js/database.js');
+const { client } = require('./database.js');
 const db = client.db("cashier");
 
 let initialPath = path.join(__dirname, '../src/');
