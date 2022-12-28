@@ -1,8 +1,0 @@
-def Login():
-	username = input("Username	: ")
-	password = input("Password	: ")
-
-	if username in database and database[username] == password:
-		print("Login berhasil")
-	else:
-		print("Login gagal, mohon masukan username dan password dengan benar")

@@ -27,6 +27,8 @@ app.use(
     })
 );
 
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(initialPath, 'login.html'));
 });
