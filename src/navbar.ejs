@@ -49,12 +49,30 @@
             </ul>
         </div>
         <div class="bottom-content">
-            <li class="">
-                <a href="/login">
+            <li class="logout">
+                <a>
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text">Logout</span>
                 </a>
             </li>
         </div>
     </div>
+    <script>
+        document.querySelector('.logout').addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default action (redirecting to the href)
+
+            // Send a POST request to the logout API
+            fetch('/api/logout', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedOut) {
+                        // If the user was successfully logged out, redirect to the login page
+                        window.location.href = '/login.html';
+                    } else {
+                        // Otherwise, display an error message
+                        console.error('Error logging out');
+                    }
+                });
+        });
+    </script>
 </nav>
