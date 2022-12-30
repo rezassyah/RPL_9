@@ -21,6 +21,14 @@ client.connect(err => {
 
           console.log("users collection created");
 
+          db.collection('users').createIndex({ email: 1 }, { unique: true }, (err, result) => {
+            if (err) {
+              console.log('Error creating unique index on email field:', err);
+            } else {
+              console.log('Unique index on email field created:', result);
+            }
+          });
+
           // Insert three dummy users into the "users" collection
           db.collection("users").insertMany([
             {
@@ -75,6 +83,14 @@ client.connect(err => {
           }
 
           console.log("items collection created");
+
+          db.collection('items').createIndex({ kode_item: 1 }, { unique: true }, (err, result) => {
+            if (err) {
+              console.log('Error creating unique index on kode_item field:', err);
+            } else {
+              console.log('Unique index on kode_item field created:', result);
+            }
+          });
 
           // Insert three dummy items into the "items" collection
           db.collection("items").insertMany([
@@ -544,7 +560,7 @@ client.connect(err => {
     });
   } catch (err) {
 
-  } 
+  }
 
   // Close the connection to the MongoDB server
   //client.close();

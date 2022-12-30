@@ -34,7 +34,7 @@ const validateData = (data) => {
     if (!data.email) {
         alertBox(data)
     } else {
-        location.href = '../dashboard.html'
+        location.href = '../dashboard'
     }
 }
 

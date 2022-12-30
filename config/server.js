@@ -2,11 +2,13 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const ejs = require('ejs');
 const app = express();
 const port = process.env.PORT || 5500;
 const cors = require('cors');
 const { client } = require('./database.js');
 const db = client.db("cashier");
+const validator = require('../src/js/validator');
 
 let initialPath = path.join(__dirname, '../src/');
 
@@ -30,17 +32,42 @@ app.use(
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.status(200).sendFile(path.join(initialPath, 'login.html'));
+    res.status(200).sendFile(path.join(initialPath, 'login'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.render('../src/dashboard', { selected: 'dashboard', name: req.session.name, profession: req.session.merchant });
+});
+
+app.get('/kasir', (req, res) => {
+    res.render('../src/kasir', { selected: 'kasir', name: req.session.name, profession: req.session.merchant });
+});
+
+app.get('/notif', (req, res) => {
+    res.render('../src/notif', { selected: 'notif', name: req.session.name, profession: req.session.merchant });
+});
+
+app.get('/pendapatan', (req, res) => {
+    res.render('../src/pendapatan', { selected: 'pendapatan', name: req.session.name, profession: req.session.merchant });
+});
+
+app.get('/stock', (req, res) => {
+    res.render('../src/stock', { selected: 'stock', name: req.session.name, profession: req.session.merchant });
 });
 
 app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
+    //check fields 
     if (!email || !password) {
         return res.json('fill in all the fields');
     }
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    if (!emailRegex.test(email)) {
+    //check email validity
+    if (!validator.isValidEmail(email)) {
         return res.json('invalid email, insert real email address');
+    }
+    //check password validity
+    if (!validator.isValidPassword(password)) {
+        return res.json('invalid password');
     }
     // Find a user with the specified email and password in the "users" collection
     db.collection('users').findOne(
@@ -52,7 +79,18 @@ app.post('/api/login', (req, res) => {
                 if (result) {
                     // If a user is found, set a session variable with the user's email
                     req.session.email = email;
-                    res.send(result);
+                    req.session.name = result.name;
+                    req.session.merchant = result.merchant;
+
+                    // Save the session to a cookie
+                    req.session.save((err) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            // If the session was saved successfully, return the user's data
+                            res.send(result);
+                        }
+                    });
                 } else {
                     // If no user is found, return an error message
                     res.json('Invalid email or password');
@@ -95,14 +133,9 @@ app.get('/api/readData', (req, res) => {
 });
 
 app.get('/api/readUser', (req, res) => {
-    const userEmail = req.query.email;
-    const userPassword = req.query.password;
-    if (!userEmail || !userPassword) {
-        return res.json('fill in all the fields');
-    }
     // Find a user with the specified email and password in the "users" collection
     db.collection('users').findOne(
-        { email: userEmail, password: userPassword },
+        { email: userEmail },
         (err, result) => {
             if (err) {
                 res.json(err);
@@ -118,22 +151,30 @@ app.get('/api/readUser', (req, res) => {
 
 app.post('/api/createUser', (req, res) => {
     const { name, merchant, email, password, rptpassword } = req.body;
-    // Insert the new user into the "users" collection
-    if (!name.length || !email.length || !merchant.length || !password.length || !rptpassword.length) {
+    // Check if any of the required fields are empty
+    if (!name || !email || !merchant || !password || !rptpassword) {
         return res.json('fill in all the fields');
     }
+    //check email validity
+    if (!validator.isValidEmail(email)) {
+        return res.json('invalid email, insert real email address');
+    }
+    //check password validity
+    if (!validator.isValidPassword(password)) {
+        return res.json('invalid password');
+    }
+    //check matching password
     if (!rptpassword.match(password)) {
         return res.json('password not match');
-    }
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    if (!emailRegex.test(email)) {
-        return res.json('invalid email, insert real email address');
     }
     db.collection('users').insertOne(
         { name, merchant, email, password },
         (err, result) => {
             if (err) {
-                res.json(err);
+                if (err.code === 11000) {
+                    return res.json("Duplicate email, please login")
+                }
+                res.json(err.message);
             } else {
                 res.send(result);
                 console.log(result);
