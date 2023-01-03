@@ -320,6 +320,70 @@ body.dark .switch::before {
     padding-left: 70px;
     flex-direction: row;
 }
+
+.container-product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gambar-produk {
+    display: flex;
+    width : 75px;
+    height : 75px;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #DDD;
+  }
+  
+  .product-up {
+    display : flex;
+    align-items: center;
+    margin-left: 20px;
+    font-size: 17px;
+    position : relative;
+    float: left;
+  }
+  
+  .product img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .product h4 {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .product-bottom {
+    font-size: 13px;
+    margin-left: 20px;
+    text-align: left;
+  }
+  
+  .product p {
+    font-size: 5px;
+    margin: 10px 0;
+  }
+  
+  .product p:nth-child(2) {
+    font-size: 15px;
+    font-weight: bold;
+    color: green;
+  }
+  
+  .product p:last-child {
+    font-size: 10px;
+    font-weight: bold;
+    color: blue;
+  }
 #b1 {
     width: 120vw;
     height: 85vh;
