@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/dashboard.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Dashboard Cashy</title>
+</head>
+
+<body>
+    <div class="bg">
+        <img src="./elemen/Ellipseblue1.png" alt="bg1">
+    </div>
+    <div class="bg2">
+        <img src="./elemen/Elipsblue2.png" alt="bg2">
+    </div>
+    <%- include('./navbar.ejs') %>
+    <section class="home">
+        <div class="text">Dashboard</div>
+        <div class="box-wrapper">
+            <div class="container">
+                <div id="b1">
+                    <form id="search-form">
+                        <input type="text" id="search-input" placeholder="Cari produk...">
+                        <button type="submit">Cari</button>
+                    </form>
+                    <div id="search-result"></div>
+                    <div class="containter-product">
+                        <div class="product-up">
+                            <img class="gambar-produk" src="elemen/1.jpg">
+                          </div>
+                          <div class="product-bottom">
+                            <h4>Nama Produk</h4>
+                            <p>Rp0 . Stok 0</p>
+                          </div>
+                    </div>
+                    
+                </div>
+                <div class="middle-column">
+                    <div id="b2">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <div id="b3">
+                        <canvas id="income-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="./js/dashboard.js"></script>
+
+</body>
+
+</html>

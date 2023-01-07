@@ -90,13 +90,18 @@ var chart = new Chart(ctx, {
     },
     // Opsi yang akan diterapkan pada chart
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+      maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false,
+            min: 0,
+            stepSize: 1000000
+          }
+        }]
+      }
+      
     }
 });
 
@@ -124,8 +129,60 @@ var chart = new Chart(ctx, {
     modeText.innerText = "Light mode"
     }else{
     modeText.innerText = "Dark mode"
-    
+
     }
     })
 
+    const searchForm = document.querySelector('#search-form');
+    const searchResult = document.querySelector('#search-result');
+    function showSearchResult(products) {
+      // Menghapus isi elemen hasil pencarian sebelumnya
+      searchResult.innerHTML = '';
+  
+      // Menampilkan hasil pencarian
+      products.forEach(product => {
+        searchResult.innerHTML += `
+          <div class="product">
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <p>Harga: Rp${product.price}</p>
+            <p>Stok: ${product.stock}</p>
+          </div>
+        `;
+      });
+    }
+
+    function handleSearch(event) {
+      event.preventDefault();
+  
+      // Menyimpan kata kunci pencarian
+      const keyword = event.target.elements.searchInput.value;
+  
+      // Mendapatkan hasil pencarian dari server (simulasinya dengan setTimeout)
+      setTimeout(() => {
+        const products = [
+          {
+            name: 'Coca Cola',
+            image: '/path/to/image1.jpg',
+            description: 'Minuman berkarbonasi yang populer',
+            price: 20000,
+            stock: 5
+          },
+          {
+            name: 'Pepsi',
+            image: '/path/to/image2.jpg',
+            description: 'Minuman berkarbonasi yang populer',
+            price: 15000,
+            stock: 8
+        }
+      ];
+
+      // Menampilkan hasil pencarian yang sesuai dengan kata kunci
+      showSearchResult(products.filter(product => product.name.includes(keyword)));
+    }, 1000);
+  }
+
+  // Menangani submit form pencarian
+  searchForm.addEventListener('submit', handleSearch);
     
