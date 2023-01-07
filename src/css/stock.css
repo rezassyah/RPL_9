@@ -327,6 +327,17 @@ body.dark .switch::before{
     border: solid 0.1px #04ff3a80;
 }
 
+.card-border{
+    width: 1330px;
+    height: 600px;
+    margin-left: 70px;
+    border: solid 1px gray;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.263);
+    box-shadow: 2px 2px 2px 0px #707070a1;
+    border: solid 0.1px #1697d380;
+}
+
 #b1 {
     height: 100%;
     width: 100%;
