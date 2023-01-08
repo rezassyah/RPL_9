@@ -22,96 +22,103 @@
     </div>
     <%- include('./navbar.ejs') %>
     <section class="home">
-        <main class="page-content">
-            <div class="container-fluid">
-        
-            <div class="d-block d-sm-block d-md-none d-lg-none py-2"></div><!-- isinya -->
-        <form method="post">
-        <div class="row">
-        
-          <div class="col-sm-4 col-md-4 col-lg-3 mb-3">
-            <label class="small text-muted mb-1">Kode Produk</label>
-            <div class="position-relative">
-            <input type="text" name="Ckdproduk" class="form-control form-control-sm" list="datalist1" onchange="changeValue(this.value)" required="" autofocus="">
-            <datalist id="datalist1">
-                    </datalist>
-            <span class="position-absolute icon-qr"><i class="fas fa-qrcode text-muted"></i></span>
-            </div>
-          </div>
-          <div class="col-sm-4 col-md-4 col-lg-3 mb-3">
-            <label class="small text-muted mb-1">Nama Produk</label>
-            <input type="text" name="Cnproduk" id="nama_produk" class="form-control form-control-sm bg-light" readonly="">
-            <input type="hidden" name="harga_modal" id="harga_modal">
-          </div>
-          <div class="col-8 col-sm-4 col-md-4 col-lg-2 mb-3">
-            <label class="small text-muted mb-1">Harga</label>
-            <input type="number" name="Charga" placeholder="0" id="harga_jual" onchange="InputSub()" class="form-control form-control-sm bg-light" readonly="">
-          </div>
-          <div class="col-4 col-sm-4 col-md-4 col-lg-1 mb-3">
-            <label class="small text-muted mb-1">Qty</label>
-            <input type="number" name="Cqty" id="Iqty" onchange="InputSub()" placeholder="0" class="form-control form-control-sm" required="">
-          </div>
-          <div class="col-sm-8 col-md-8 col-lg-3 mb-3">
-            <label class="small text-muted mb-1">Subtotal</label>
-            <div class="input-group">
-              <input type="number" name="Csubs" placeholder="0" id="Isubtotal" onchange="InputSub()" class="form-control form-control-sm bg-light mr-2" readonly="">
-            <div class="input-group-append">
-              <button type="reset" class="btn btn-danger btn-sm mr-2">Reset</button>
-              <button type="submit" name="InputCart" class="btn btn-primary btn-sm">Simpan</button>
-            </div>
-          </div>
-          </div>
-        
-        </div><!-- end row -->
-        </form>
-        <div class="bg-cyan p-2 text-white" style="border-radius:0.25rem;">
-          <h5 class="mb-0">No. Invoice : </h5>
-        </div>
-        <div id="cart_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row mb-2"><div class="col-4 col-md-6 ps-0"></div><div class="col-8 col-md-6 ps-0 pl-0"></div></div><div class="row"><div class="col-sm-12"><table class="table table-striped table-sm table-bordered dt-responsive nowrap print-none dataTable no-footer dtr-inline" id="cart" width="100%" style="width: 100%;">
-        <thead>
-          <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 12.0889px;" aria-sort="ascending" aria-label="#: activate to sort column descending">#</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 90.0889px;" aria-label="Kode Produk: activate to sort column ascending">Kode Produk</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 96.0889px;" aria-label="Nama Produk: activate to sort column ascending">Nama Produk</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 44.0889px;" aria-label="Harga: activate to sort column ascending">Harga</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 26.0889px;" aria-label="Qty: activate to sort column ascending">Qty</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 61.0889px;" aria-label="Subtotal: activate to sort column ascending">Subtotal</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 33.0889px;" aria-label="Opsi: activate to sort column ascending">Opsi</th></tr>
-        </thead>
-        <tbody>
-        <tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr></tbody>
-        </table></div></div><div class="row"><div class="col-sm-12 col-md-5"></div><div class="col-sm-12 col-md-7"></div></div></div>
-        <div class="bg-light p-3" style="border-radius:0.25rem;">
-          <div class="row gy-3 align-items-center row-home">
-        
-            <div class="col-md-8 col-lg-6 mb-2">
-            <form method="post">
-              <input type="hidden" id="totalCart" value="">
-              <div class="row">
-                <label for="pembayaran" class="col-4 col-sm-4 col-md-4 col-lg-3 col-form-label col-form-label-sm mb-2">Pembayaran</label>
-                <div class="col-8 col-sm-8 col-md-8 col-lg-9 mb-2">
-                  <input type="text" name="pembayaran" onchange="procesBayar()" class="form-control form-control-sm" id="pembayaran" placeholder="0" required="">
+        <div class="text">Kasir</div>
+        <div class="box-wrapper">
+            <div class="container">
+                <div id="b1">
+                    <main class="page-content">
+                        <div class="container-fluid">
+                    
+                        <div class="d-block d-sm-block d-md-none d-lg-none py-2"></div><!-- isinya -->
+                    <form method="post">
+                    <div class="row">
+                    
+                    <div class="col-sm-4 col-md-4 col-lg-3 mb-3">
+                        <label class="small text-muted mb-1">Kode Produk</label>
+                        <div class="position-relative">
+                        <input type="text" name="Ckdproduk" class="form-control form-control-sm" list="datalist1" onchange="changeValue(this.value)" required="" autofocus="">
+                        <datalist id="datalist1">
+                                </datalist>
+                        <span class="position-absolute icon-qr"><i class="fas fa-qrcode text-muted"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-3 mb-3">
+                        <label class="small text-muted mb-1">Nama Produk</label>
+                        <input type="text" name="Cnproduk" id="nama_produk" class="form-control form-control-sm bg-light" readonly="">
+                        <input type="hidden" name="harga_modal" id="harga_modal">
+                    </div>
+                    <div class="col-8 col-sm-4 col-md-4 col-lg-2 mb-3">
+                        <label class="small text-muted mb-1">Harga</label>
+                        <input type="number" name="Charga" placeholder="0" id="harga_jual" onchange="InputSub()" class="form-control form-control-sm bg-light" readonly="">
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-1 mb-3">
+                        <label class="small text-muted mb-1">Qty</label>
+                        <input type="number" name="Cqty" id="Iqty" onchange="InputSub()" placeholder="0" class="form-control form-control-sm" required="">
+                    </div>
+                    <div class="col-sm-8 col-md-8 col-lg-3 mb-3">
+                        <label class="small text-muted mb-1">Subtotal</label>
+                        <div class="input-group">
+                        <input type="number" name="Csubs" placeholder="0" id="Isubtotal" onchange="InputSub()" class="form-control form-control-sm bg-light mr-2" readonly="">
+                        <div class="input-group-append">
+                        <button type="reset" class="btn btn-danger btn-sm mr-2">Reset</button>
+                        <button type="submit" name="InputCart" class="btn btn-primary btn-sm">Simpan</button>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    </div><!-- end row -->
+                    </form>
+                    <div class="bg-cyan p-2 text-white" style="border-radius:0.25rem;">
+                    <h5 class="mb-0">No. Invoice : </h5>
+                    </div>
+                    <div id="cart_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row mb-2"><div class="col-4 col-md-6 ps-0"></div><div class="col-8 col-md-6 ps-0 pl-0"></div></div><div class="row"><div class="col-sm-12"><table class="table table-striped table-sm table-bordered dt-responsive nowrap print-none dataTable no-footer dtr-inline" id="cart" width="100%" style="width: 100%;">
+                    <thead>
+                    <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 12.0889px;" aria-sort="ascending" aria-label="#: activate to sort column descending">#</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 90.0889px;" aria-label="Kode Produk: activate to sort column ascending">Kode Produk</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 96.0889px;" aria-label="Nama Produk: activate to sort column ascending">Nama Produk</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 44.0889px;" aria-label="Harga: activate to sort column ascending">Harga</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 26.0889px;" aria-label="Qty: activate to sort column ascending">Qty</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 61.0889px;" aria-label="Subtotal: activate to sort column ascending">Subtotal</th><th class="sorting" tabindex="0" aria-controls="cart" rowspan="1" colspan="1" style="width: 33.0889px;" aria-label="Opsi: activate to sort column ascending">Opsi</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr></tbody>
+                    </table></div></div><div class="row"><div class="col-sm-12 col-md-5"></div><div class="col-sm-12 col-md-7"></div></div></div>
+                    <div class="bg-light p-3" style="border-radius:0.25rem;">
+                    <div class="row gy-3 align-items-center row-home">
+                    
+                        <div class="col-md-8 col-lg-6 mb-2">
+                        <form method="post">
+                        <input type="hidden" id="totalCart" value="">
+                        <div class="row">
+                            <label for="pembayaran" class="col-4 col-sm-4 col-md-4 col-lg-3 col-form-label col-form-label-sm mb-2">Pembayaran</label>
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-9 mb-2">
+                            <input type="text" name="pembayaran" onchange="procesBayar()" class="form-control form-control-sm" id="pembayaran" placeholder="0" required="">
+                            </div>
+                            <label for="kembalian" class="col-4 col-sm-4 col-md-4 col-lg-3 col-form-label col-form-label-sm mb-2">Kembalian</label>
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-9 mb-2">
+                            <input type="text" class="form-control form-control-sm bg-light" id="kembalian" placeholder="0" readonly="">
+                            <input type="hidden" name="kembalian" id="kembalian1">
+                            </div>
+                            <div class="col-sm-12 text-right">
+                        <div class="d-block d-sm-block d-md-none d-lg-none py-1"></div>
+                                    <button class="btn btn-danger btn-sm px-3 mr-2" disabled="">
+                            <i class="fa fa-trash-alt mr-1"></i>Hapus Semua</button>
+                            <button class="btn btn-primary btn-sm px-3" disabled="">
+                            <i class="fa fa-check mr-1"></i>Simpan</button>
+                            </div>
+                        </div>
+                        </form>
+                        </div>
+                    
+                        <div class="col-md-4 col-lg-6 mb-2 text-primary text-right">
+                        <p class="small text-muted mb-0">Total Item</p>
+                        <h3 class="mb-0" style="font-weight:600;">Rp. 0</h3>
+                        </div>
+                        
+                    </div>
+                    </div>
+                    <!-- end isinya -->
+                    
+                    </div><!-- end container-fluid" -->
+                    </main>
                 </div>
-                <label for="kembalian" class="col-4 col-sm-4 col-md-4 col-lg-3 col-form-label col-form-label-sm mb-2">Kembalian</label>
-                <div class="col-8 col-sm-8 col-md-8 col-lg-9 mb-2">
-                  <input type="text" class="form-control form-control-sm bg-light" id="kembalian" placeholder="0" readonly="">
-                  <input type="hidden" name="kembalian" id="kembalian1">
-                </div>
-                <div class="col-sm-12 text-right">
-              <div class="d-block d-sm-block d-md-none d-lg-none py-1"></div>
-                         <button class="btn btn-danger btn-sm px-3 mr-2" disabled="">
-                  <i class="fa fa-trash-alt mr-1"></i>Hapus Semua</button>
-                  <button class="btn btn-primary btn-sm px-3" disabled="">
-                  <i class="fa fa-check mr-1"></i>Simpan</button>
-                  </div>
-              </div>
-              </form>
             </div>
-        
-            <div class="col-md-4 col-lg-6 mb-2 text-primary text-right">
-              <p class="small text-muted mb-0">Total Item</p>
-              <h3 class="mb-0" style="font-weight:600;">Rp. 0</h3>
-            </div>
-            
-          </div>
         </div>
-        <!-- end isinya -->
-        
-        </div><!-- end container-fluid" -->
-          </main>
     </section>
 
     <script src="./js/kasir.js"></script>
