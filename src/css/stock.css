@@ -384,14 +384,30 @@ table {
   }
   
   button:hover {
+    color : #ffffff;
     background-color: #45a049;
   }
   
   .remove-button {
     background-color: #f44336;
+
   }
-  
+
+   .remove-button {
+    color : #ffffff;
+    background-color: #f44336;
+    
+  }
   .remove-button:hover {
     background-color: #da190b;
+  }
+
+  .add-button{
+    color : #ffffff;
+    background-color: #1698D3;
+  }
+
+  .add-button:hover{
+    background-color: #0e5576;
   }
   
