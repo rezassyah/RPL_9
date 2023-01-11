@@ -81,6 +81,7 @@ app.post('/api/login', (req, res) => {
                     req.session.email = email;
                     req.session.name = result.name;
                     req.session.merchant = result.merchant;
+                    req.session.storeId = result.storeId;
 
                     // Save the session to a cookie
                     req.session.save((err) => {
@@ -167,8 +168,12 @@ app.post('/api/createUser', (req, res) => {
     if (!rptpassword.match(password)) {
         return res.json('password not match');
     }
+    //check storeId
+    const idRes = db.collection('users').findOne({}, { sort: { storeId: -1 } });
+    const nextID = idRes ? idRes.storeId + 1 : 1;
+
     db.collection('users').insertOne(
-        { name, merchant, email, password },
+        { name, nextID, merchant, email, password },
         (err, result) => {
             if (err) {
                 if (err.code === 11000) {
@@ -218,6 +223,119 @@ app.delete('/api/deleteUser', (req, res) => {
         }
         res.send(result);
         console.log(result);
+    });
+});
+
+app.post('/api/items', (req, res) => {
+    const item = req.body;
+    db.collection('items').insertOne(item, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error inserting item into the collection' });
+        } else {
+            res.send(result.ops[0]);
+        }
+    });
+});
+
+app.get('/api/readAllItems/', (req, res) => {
+    const storeId = req.session.storeId;
+    db.collection('items').find({ storeId: storeId }).toArray((err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error finding items in the collection' });
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.get('/api/items/:id', (req, res) => {
+    const id = req.params.id;
+    db.collection('items').findOne({ _id: ObjectId(id) }, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error finding item in the collection' });
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.put('/api/items/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedItem = req.body;
+    db.collection('items').updateOne({ _id: ObjectId(id) }, { $set: updatedItem }, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error updating item in the collection' });
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.delete('/api/items/:id', (req, res) => {
+    const id = req.params.id;
+    db.collection('items').deleteOne({ _id: ObjectId(id) }, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error deleting item from the collection' });
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.post('/api/sales', (req, res) => {
+    const sale = req.body;
+    db.collection('sales').insertOne(sale, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error inserting sale into the collection' });
+        } else {
+            res.send(result.ops[0]);
+        }
+    });
+});
+
+app.get('/api/readAllSales/', (req, res) => {
+    const storeId = 1;
+    db.collection('sales').find({ storeId: storeId }).sort({ tahun: 1, bulan:1 }).toArray((err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error finding sales in the collection' });
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
+app.get('/api/sales/:id', (req, res) => {
+    const id = req.params.id;
+    db.collection('sales').findOne({ _id: ObjectId(id) }, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error finding sale in the collection' });
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.put('/api/sales/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedSale = req.body;
+    db.collection('sales').updateOne({ _id: ObjectId(id) }, { $set: updatedSale }, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error updating sale in the collection' });
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.delete('/api/sales/:id', (req, res) => {
+    const id = req.params.id;
+    db.collection('sales').deleteOne({ _id: ObjectId(id) }, (err, result) => {
+        if (err) {
+            res.status(500).send({ error: 'Error deleting sale from the collection' });
+        } else {
+            res.send(result);
+        }
     });
 });
 

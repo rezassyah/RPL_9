@@ -1,6 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://rpl9:cashier@cluster0.kcue3z5.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
+
 client.connect(err => {
   const db = client.db("cashier");
 
@@ -21,11 +22,19 @@ client.connect(err => {
 
           console.log("users collection created");
 
+          db.collection('users').createIndex({ storeId: 1 }, { unique: true }, (err, result) => {
+            if (err) {
+              console.log('Error creating unique index on  storeId field:', err);
+            } else {
+              console.log('Unique index on  storeId field created:', result);
+            }
+          });
+
           db.collection('users').createIndex({ email: 1 }, { unique: true }, (err, result) => {
             if (err) {
-              console.log('Error creating unique index on email field:', err);
+              console.log('Error creating unique index on email  field:', err);
             } else {
-              console.log('Unique index on email field created:', result);
+              console.log('Unique index on email  field created:', result);
             }
           });
 
@@ -33,21 +42,24 @@ client.connect(err => {
           db.collection("users").insertMany([
             {
               name: "Naufal Adrian Hidayat",
+              storeId: 1,
               merchant: "Sempurna",
               email: "Naufal111@gmail.com",
               password: "KamuKepo.com"
             },
             {
               name: "Adrian Hidayat",
+              storeId: 2,
               merchant: "Hidayat Shop",
               email: "naufaladr@gmail.com",
               password: "naufal123"
             },
             {
               name: "John Doe",
+              storeId: 3,
               merchant: "Doe's Shop",
               email: "john@doe.com",
-              password: "john123"
+              password: "john12345"
             }
           ], { upsert: true }, function (err, res) {
             if (err) {
@@ -92,6 +104,14 @@ client.connect(err => {
             }
           });
 
+          db.collection('items').createIndex({ storeId: 1 }, { unique: false }, (err, result) => {
+            if (err) {
+              console.log('Error creating unique index on storeId field:', err);
+            } else {
+              console.log('Unique index on storeId field created:', result);
+            }
+          });
+
           // Insert three dummy items into the "items" collection
           db.collection("items").insertMany([
             {
@@ -102,7 +122,8 @@ client.connect(err => {
               harga: 3500,
               harga_dasar: 3000,
               kategori: "Peralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Lux (Batang)",
               deskripsi: "Sabun mandi keperluan rumah tangga",
@@ -111,7 +132,8 @@ client.connect(err => {
               harga: 3500,
               harga_dasar: 3000,
               kategori: "Peralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Head & Shoulders",
               deskripsi: "Shampoo untuk rambutmu yang ingin panjang dan lebat",
@@ -120,7 +142,8 @@ client.connect(err => {
               harga: 55000,
               harga_dasar: 45000,
               kategori: "Peralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Lifebuoy Shampoo",
               deskripsi: "Shampoo untuk kesehatan rambutmu yang lebat",
@@ -129,7 +152,8 @@ client.connect(err => {
               harga: 20000,
               harga_dasar: 15000,
               kategori: "Peralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Pepsodent",
               deskripsi: "Pasta Gigi ekonomis dan higenis agar tetap membuat gigimu putih dan mencegah berlubang",
@@ -138,7 +162,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 4000,
               kategori: "Peralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Aqua (1500 ml)",
               deskripsi: "Air mineral yang berasal dari pegunungan asli, sehat untuk dikonsumsi",
@@ -147,7 +172,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Aqua (750 ml)",
               deskripsi: "Air mineral yang berasal dari pegunungan asli, sehat untuk dikonsumsi",
@@ -156,7 +182,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 4000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Aqua (500 ml)",
               deskripsi: "Air mineral yang berasal dari pegunungan asli, sehat untuk dikonsumsi",
@@ -165,7 +192,8 @@ client.connect(err => {
               harga: 3500,
               harga_dasar: 3000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "Gery Chocolatos",
               deskripsi: "Coklat wafer yang renyah serta coklat yang lembut membuat kamu lebih ingin memakannya",
@@ -174,7 +202,8 @@ client.connect(err => {
               harga: 2000,
               harga_dasar: 1500,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "Super Pel (780 ml)",
               deskripsi: "Pel lantai yang super bersih, membersihkan 99% kuman di lantai",
@@ -183,7 +212,8 @@ client.connect(err => {
               harga: 10000,
               harga_dasar: 7500,
               kategori: "Peralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "Super Pel (250 ml)",
               deskripsi: "Pel lantai yang super bersih, membersihkan 99% kuman di lantai",
@@ -192,7 +222,8 @@ client.connect(err => {
               harga: 2500,
               harga_dasar: 1700,
               kategori: "Peralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "Richeese Nabati",
               deskripsi: "Wafer keju yang renyah, rasa kejunya bikin kamu ga nahan dan mau lagi!",
@@ -201,7 +232,8 @@ client.connect(err => {
               harga: 2000,
               harga_dasar: 1700,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "Richeese Ahh",
               deskripsi: "Wafer keju yang renyah, rasa kejunya bikin kamu meleleh dan ketagihan setiap saat",
@@ -210,7 +242,8 @@ client.connect(err => {
               harga: 2000,
               harga_dasar: 1700,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "Qtela (185 g)",
               deskripsi: "Makanan ringan yang enak dan renyah",
@@ -219,7 +252,8 @@ client.connect(err => {
               harga: 15000,
               harga_dasar: 12500,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Qtela (55 g)",
               deskripsi: "Makanan ringan yang enak dan renyah",
@@ -228,7 +262,8 @@ client.connect(err => {
               harga: 7500,
               harga_dasar: 5000,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Chitato(120 g)",
               deskripsi: "Keripik yang renyah, membuat lidahmu terasa menggigit dan haus akan rasa yang nikmat",
@@ -237,7 +272,8 @@ client.connect(err => {
               harga: 17000,
               harga_dasar: 15000,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Chitato(70 g)",
               deskripsi: "Keripik yang renyah, membuat lidahmu terasa menggigit dan haus akan rasa yang nikmat",
@@ -246,7 +282,8 @@ client.connect(err => {
               harga: 6000,
               harga_dasar: 5000,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Choki-Choki",
               deskripsi: "Coklat yang lumer dan nikmat, bikin mulut kita kepengen terus merasakannya.",
@@ -255,7 +292,8 @@ client.connect(err => {
               harga: 1000,
               harga_dasar: 800,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Sunlight (500 ml)",
               deskripsi: "Sabun cuci piring ekonomis terbaik",
@@ -264,7 +302,8 @@ client.connect(err => {
               harga: 17000,
               harga_dasar: 15000,
               kategori: "SPeralatan Rumah Tangga",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Milku",
               deskripsi: "Minuman susu dengan rasa yang bisa diingat oleh semua orang",
@@ -273,7 +312,8 @@ client.connect(err => {
               harga: 3500,
               harga_dasar: 3000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Teh Zegar",
               deskripsi: "Minuman teh yang segar dan nikmat di tenggorokan",
@@ -282,7 +322,8 @@ client.connect(err => {
               harga: 2000,
               harga_dasar: 1500,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Sprite (250 ml)",
               deskripsi: "Minuman soda yang segar",
@@ -291,7 +332,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 4000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Sprite (500 ml)",
               deskripsi: "Minuman soda yang segar",
@@ -300,7 +342,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Sprite (1200 ml)",
               deskripsi: "Minuman soda yang segar",
@@ -309,7 +352,8 @@ client.connect(err => {
               harga: 12000,
               harga_dasar: 10000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Coca Cola (250 ml)",
               deskripsi: "Minuman soda yang akan terasa baik saat kamu meminumnya bersama teman-temanmu",
@@ -318,7 +362,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 4000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Coca Cola (500 ml)",
               deskripsi: "Minuman soda yang akan terasa baik saat kamu meminumnya bersama teman-temanmu",
@@ -327,7 +372,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "Coca Cola (1200 ml)",
               deskripsi: "Minuman soda yang akan terasa baik saat kamu meminumnya bersama teman-temanmu",
@@ -336,7 +382,8 @@ client.connect(err => {
               harga: 12000,
               harga_dasar: 10000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Beng-beng",
               deskripsi: "Coklat wafer nikmat yang bisa kamu rasakan tiap waktu",
@@ -345,7 +392,8 @@ client.connect(err => {
               harga: 2000,
               harga_dasar: 1500,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Fanta (250 ml)",
               deskripsi: "Soda minuman yang membuatmu ingin mencapai tujuanmu dengan semangat lebih",
@@ -354,7 +402,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 4000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Fanta (500 ml)",
               deskripsi: "Soda minuman yang membuatmu ingin mencapai tujuanmu dengan semangat lebih",
@@ -363,7 +412,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Fanta (1200 ml)",
               deskripsi: "Soda minuman yang membuatmu ingin mencapai tujuanmu dengan semangat lebih",
@@ -372,7 +422,8 @@ client.connect(err => {
               harga: 12000,
               harga_dasar: 10000,
               kategori: "Minuman",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "Komo",
               deskripsi: "Chiki rasa keju yang renyah dan lembuh di mulut",
@@ -381,7 +432,8 @@ client.connect(err => {
               harga: 1000,
               harga_dasar: 500,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "JetZ",
               deskripsi: "Chiki enak yang bisa dirasakan dengan nikmat bersama temanmu",
@@ -390,7 +442,8 @@ client.connect(err => {
               harga: 1000,
               harga_dasar: 500,
               kategori: "Snack",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "AICE Goal!!!",
               deskripsi: "Es krim berbentuk bola yang bisa menemanimu saat menonton bola bersama lingkungan terdekatmu",
@@ -399,7 +452,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Blueberry Mania",
               deskripsi: "Es Krim rasa blueberry yang lumer di mulut",
@@ -408,7 +462,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 6000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Chocolate Crispy",
               deskripsi: "Es Krim rasa coklat yang memiliki 2 lapisan coklat yang renyah",
@@ -417,7 +472,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Sweet Corn",
               deskripsi: "Es Krim rasa jagung di setiap gigitannya renyah di mulut",
@@ -426,7 +482,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 3000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Mango Slush",
               deskripsi: "Es Krim rasa mangga yang segar di mulut",
@@ -435,7 +492,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Mango Less Sugar",
               deskripsi: "Es Krim rasa mangga yang manis di dalam mulut",
@@ -444,7 +502,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 3000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Mochi Chocolate",
               deskripsi: "Es Krim mochi rasa coklat yang lumer coklatnya di dalam mulut",
@@ -453,7 +512,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 3500,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Mochi Vanilla",
               deskripsi: "Es Krim mochi rasa vanilla yang lumer vanilla di dalam mulut",
@@ -462,7 +522,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 3500,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "AICE Chocolate Sundae Cup",
               deskripsi: "Es Krim Cup rasa coklat yang rasa coklatnya menggelegar di dalam mulut",
@@ -471,7 +532,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5800,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "AICE Strawberry Sundae Cup",
               deskripsi: "Es Krim Cup rasa strawberry yang rasa strawberry menggelegar di dalam mulut",
@@ -480,7 +542,8 @@ client.connect(err => {
               harga: 7000,
               harga_dasar: 5800,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "AICE Durian Cup",
               deskripsi: "Es Krim Cup rasa durian yang rasa durian khas dan ingin mencoba lagi dan lagi.",
@@ -489,7 +552,8 @@ client.connect(err => {
               harga: 15000,
               harga_dasar: 12500,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 1
             }, {
               nama_item: "AICE Coffe Crispy",
               deskripsi: "Es Krim stik rasa coffe dan dilapisi coklat yang renyah.",
@@ -498,7 +562,8 @@ client.connect(err => {
               harga: 6000,
               harga_dasar: 4500,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "AICE Strawberry Crispy",
               deskripsi: "Es Krim strawbeery dengan dilapisi vanilla yang renyah.",
@@ -507,7 +572,8 @@ client.connect(err => {
               harga: 6000,
               harga_dasar: 4500,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "AICE Semangka Stick",
               deskripsi: "Es Krim berbentuk semangka yang manis dan segar.",
@@ -516,7 +582,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 3000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 3
             }, {
               nama_item: "AICE Nanas Stick",
               deskripsi: "Es Krim rasa nanas yang segar dan bikin kamu fresh lagi saat kegiatan",
@@ -525,7 +592,8 @@ client.connect(err => {
               harga: 5000,
               harga_dasar: 3000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE Chocolate Almond",
               deskripsi: "Es Krim rasa coklat yang dilapisi coklat luar dengan perpaduan kacang almond yang siap melahap mulutmu dalam sekejap",
@@ -534,7 +602,8 @@ client.connect(err => {
               harga: 12000,
               harga_dasar: 10000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }, {
               nama_item: "AICE 2 Colors Stick",
               deskripsi: "Es Krim dua rasa yang bersatu padu antara coklat dan vanilla",
@@ -543,7 +612,8 @@ client.connect(err => {
               harga: 6000,
               harga_dasar: 5000,
               kategori: "Ice Cream",
-              image: ""
+              image: "",
+              storeId: 2
             }
           ], { upsert: true }, function (err, res) {
             if (err) {
@@ -559,11 +629,125 @@ client.connect(err => {
       }
     });
   } catch (err) {
+    console.error(err);
+    res.status(500).send("Something went wrong. Please try again later.");
+  }
 
+  try {
+    // Check if the "users" collection exists
+    db.listCollections({ name: "sales" }).toArray((err, collections) => {
+      if (err) {
+        console.log("Error checking for the 'sales' collection:", err);
+        throw err;
+      }
+
+      if (collections.length === 0) {
+        db.createCollection("sales", function (err, res) {
+          if (err) {
+            console.log("Error creating the 'sales' collection:", err);
+            throw err;
+          }
+
+          console.log("sales collection created");
+
+          db.collection('sales').createIndex({ kode_item: 1 }, { unique: false }, (err, result) => {
+            if (err) {
+              console.log('Error creating unique index on kode_item field:', err);
+            } else {
+              console.log('Unique index on kode_item field created:', result);
+            }
+          });
+
+          db.collection('sales').createIndex({ storeId: 1 }, { unique: false }, (err, result) => {
+            if (err) {
+              console.log('Error creating unique index on storeId field:', err);
+            } else {
+              console.log('Unique index on storeId field created:', result);
+            }
+          });
+
+          db.collection('sales').createIndex([{ tahun: 1 }, { bulan: 1 }], { unique: false }, (err, result) => {
+            if (err) {
+              console.log('Error creating unique compound index on tahun & bulan field:', err);
+            } else {
+              console.log('Unique compound index on tahun & bulan field created:', result);
+            }
+          });
+
+          // Insert three dummy users into the "users" collection
+          db.collection("sales").insertMany([
+            {
+              bulan: "Januari",
+              tahun: "2022",
+              storeId: 1,
+              kode_item: "SM001",
+              terjual: 5
+            },
+            {
+              bulan: "Januari",
+              tahun: "2022",
+              storeId: 1,
+              kode_item: "SM002",
+              terjual: 3
+            },
+            {
+              bulan: "Januari",
+              tahun: "2022",
+              storeId: 1,
+              kode_item: "SH001",
+              terjual: 8
+            },
+            {
+              bulan: "Januari",
+              tahun: "2022",
+              storeId: 1,
+              kode_item: "SH002",
+              terjual: 20
+            },
+            {
+              bulan: "Januari",
+              tahun: "2022",
+              storeId: 1,
+              kode_item: "PG001",
+              terjual: 6
+            },
+            {
+              bulan: "Januari",
+              tahun: "2022",
+              storeId: 1,
+              kode_item: "MNM001",
+              terjual: 4
+            },
+            {
+              bulan: "Januari",
+              tahun: "2022",
+              storeId: 1,
+              kode_item: "MNM002",
+              terjual: 15
+            }
+          ], { upsert: true }, function (err, res) {
+            if (err) {
+              console.log("Error inserting dummy sales:", err);
+              throw err;
+            }
+
+            console.log("dummy sales inserted");
+          });
+        });
+      } else {
+        console.log("sales collection already exists");
+      }
+    });
+  } catch (err) {
+    // Do something with the error here, e.g. log it or send it to an error reporting service
+    console.error(err);
+    res.status(500).send("Something went wrong. Please try again later.");
   }
 
   // Close the connection to the MongoDB server
   //client.close();
 });
+
+
 
 module.exports.client = client;
