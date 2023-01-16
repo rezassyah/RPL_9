@@ -521,6 +521,12 @@ button, input {
     border-color: #dc3545;
 }
 
+.btn-danger1 {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -552,6 +558,16 @@ button, input {
 }
 
 .btn-primary {
+    color: #fff;
+    background-color: #1698D3;
+    border-color: #1698D3;
+}
+
+.btn-primary1 {
+    background: #1698D3!important;
+}
+
+.btn-primary1 {
     color: #fff;
     background-color: #1698D3;
     border-color: #1698D3;

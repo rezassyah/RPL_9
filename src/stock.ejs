@@ -21,32 +21,38 @@
         <img src="./elemen/Elipsblue2.png" alt="bg2">
     </div>
     <%- include('./navbar.ejs') %>
-    <section class="home">
-        <div class="text">Stok Barang</div>
-        <div class="box-wrapper">
-            <div class="container">
-                <div id="b1">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Nama Barang</th>
-                            <th>Kode</th>
-                            <th>Stok</th>
-                            <th>Harga</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody id="table-body">
-                        <!-- The table rows will be added here dynamically -->
-                        </tbody>
-                    </table>
-                    <button id="add-button">Tambah Barang</button>
+    <div class="alert-box">
+        <p class="alert"></p>
+    </div>
+        <section class="home">
+            <div class="text">Stok Barang</div>
+            <div class="box-wrapper">
+                <div class="container">
+                    <div id="b1">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama Barang</th>
+                                    <th>Kode</th>
+                                    <th>Deskripsi</th>
+                                    <th>Stok</th>
+                                    <th>Harga</th>
+                                    <th>Harga Dasar</th>
+                                    <th>Kategori</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- The table rows will be added here dynamically -->
+                            </tbody>
+                        </table>
+                        <button id="add-button">Tambah Barang</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <script src="./js/stock.js"></script>
+        <script src="./js/stock.js"></script>
 
 </body>
 

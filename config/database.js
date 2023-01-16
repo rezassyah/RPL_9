@@ -677,53 +677,67 @@ client.connect(err => {
           // Insert three dummy users into the "users" collection
           db.collection("sales").insertMany([
             {
-              bulan: "Januari",
+              bulan: 1,
               tahun: "2022",
-              storeId: 1,
+              storeId: 2,
               kode_item: "SM001",
               terjual: 5
             },
             {
-              bulan: "Januari",
+              bulan: 1,
               tahun: "2022",
-              storeId: 1,
+              storeId: 2,
               kode_item: "SM002",
               terjual: 3
             },
             {
-              bulan: "Januari",
+              bulan: 1,
               tahun: "2022",
-              storeId: 1,
+              storeId: 2,
               kode_item: "SH001",
               terjual: 8
             },
             {
-              bulan: "Januari",
+              bulan: 1,
               tahun: "2022",
-              storeId: 1,
+              storeId: 2,
               kode_item: "SH002",
               terjual: 20
             },
             {
-              bulan: "Januari",
+              bulan: 1,
               tahun: "2022",
-              storeId: 1,
+              storeId: 2,
               kode_item: "PG001",
               terjual: 6
             },
             {
-              bulan: "Januari",
+              bulan: 1,
               tahun: "2022",
-              storeId: 1,
+              storeId: 2,
               kode_item: "MNM001",
               terjual: 4
             },
             {
-              bulan: "Januari",
+              bulan: 1,
               tahun: "2022",
-              storeId: 1,
+              storeId: 2,
               kode_item: "MNM002",
               terjual: 15
+            },
+            {
+              bulan: 2,
+              tahun: "2022",
+              storeId: 2,
+              kode_item: "SN001",
+              terjual: 9
+            },
+            {
+              bulan: 3,
+              tahun: "2022",
+              storeId: 2,
+              kode_item: "SN007",
+              terjual: 4
             }
           ], { upsert: true }, function (err, res) {
             if (err) {

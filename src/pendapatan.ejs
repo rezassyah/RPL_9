@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="./css/pendapatan.css">
-    
+
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    
-    <title>Kasir Cashy</title> 
+
+    <title>Kasir Cashy</title>
 </head>
+
 <body>
     <div class="bg">
         <img src="./elemen/Ellipseblue1.png" alt="bg1">
-    </div> 
+    </div>
     <div class="bg2">
         <img src="./elemen/Elipsblue2.png" alt="bg2">
     </div>
     <%- include('./navbar.ejs') %>
-    
+        <div class="alert-box">
+            <p class="alert"></p>
+        </div>
 
-    <section class="home">
-        <div class="text">Laporan Pendapatan</div>
-        <div class="box-wrapper">
-            <div class="container">
-                <div id="b1">
-                    <table>
-                        <thead>
-                          <tr>
-                            <th>Bulan</th>
-                            <th>Nama Barang</th>
-                            <th>Kode</th>
-                            <th>Stok</th>
-                            <th>Harga</th>
-                            <th>Total Pendapatan</th>
-                            <th>Keuntungan</th>
-                            <th>Total Keuntungan</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
+        <section class="home">
+            <div class="text">Laporan Pendapatan</div>
+            <div class="box-wrapper">
+                <div class="container">
+                    <div id="b1">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Bulan</th>
+                                    <th>Nama Barang</th>
+                                    <th>Kode</th>
+                                    <th>Stok</th>
+                                    <th>Harga</th>
+                                    <th>Total Pendapatan</th>
+                                    <th>Keuntungan</th>
+                                    <th>Total Keuntungan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- The table rows will be added here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <script src="./js/pendapatan.js"></script>
+        <script src="./js/pendapatan.js"></script>
 
 </body>
+
 </html>

@@ -228,11 +228,12 @@ app.delete('/api/deleteUser', (req, res) => {
 
 app.post('/api/items', (req, res) => {
     const item = req.body;
+    item.storeId = req.session.storeId;
     db.collection('items').insertOne(item, (err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error inserting item into the collection' });
         } else {
-            res.send(result.ops[0]);
+            res.send(result);
         }
     });
 });
@@ -248,9 +249,10 @@ app.get('/api/readAllItems/', (req, res) => {
     });
 });
 
-app.get('/api/items/:id', (req, res) => {
-    const id = req.params.id;
-    db.collection('items').findOne({ _id: ObjectId(id) }, (err, result) => {
+app.get('/api/items/:kode_item', (req, res) => {
+    const kode_item = req.params.kode_item;
+    const storeId = req.session.storeId;
+    db.collection('items').findOne({ kode_item: kode_item, storeId: storeId }, (err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error finding item in the collection' });
         } else {
@@ -259,10 +261,13 @@ app.get('/api/items/:id', (req, res) => {
     });
 });
 
-app.put('/api/items/:id', (req, res) => {
-    const id = req.params.id;
+
+app.put('/api/items/:kode_item', (req, res) => {
+    const kode_item = req.params.kode_item;
     const updatedItem = req.body;
-    db.collection('items').updateOne({ _id: ObjectId(id) }, { $set: updatedItem }, (err, result) => {
+    updatedItem.storeId = req.session.storeId;
+    const storeId = req.session.storeId;
+    db.collection('items').updateOne({ kode_item: kode_item, storeId: storeId }, { $set: updatedItem }, (err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error updating item in the collection' });
         } else {
@@ -271,9 +276,10 @@ app.put('/api/items/:id', (req, res) => {
     });
 });
 
-app.delete('/api/items/:id', (req, res) => {
-    const id = req.params.id;
-    db.collection('items').deleteOne({ _id: ObjectId(id) }, (err, result) => {
+app.delete('/api/deleteItems/:kode_item', (req, res) => {
+    const kode_item = req.params.kode_item;
+    const storeId = req.session.storeId;
+    db.collection('items').deleteOne({ kode_item: kode_item, storeId: storeId }, (err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error deleting item from the collection' });
         } else {
@@ -284,17 +290,18 @@ app.delete('/api/items/:id', (req, res) => {
 
 app.post('/api/sales', (req, res) => {
     const sale = req.body;
+    sale.storeId = req.session.storeId;
     db.collection('sales').insertOne(sale, (err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error inserting sale into the collection' });
         } else {
-            res.send(result.ops[0]);
+            res.send(result);
         }
     });
 });
 
 app.get('/api/readAllSales/', (req, res) => {
-    const storeId = 1;
+    const storeId = req.session.storeId;
     db.collection('sales').find({ storeId: storeId }).sort({ tahun: 1, bulan:1 }).toArray((err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error finding sales in the collection' });
@@ -304,10 +311,38 @@ app.get('/api/readAllSales/', (req, res) => {
     });
 });
 
+app.get('/api/readSalesDates/', (req, res) => {
+    const storeId = req.session.storeId;
+    db.collection('sales').aggregate([
+        { $match: { storeId: storeId } },
+        { $group: { 
+            _id: { bulan: "$bulan", tahun: "$tahun" },
+            count: {$sum:1}
+            }
+        },
+        { $sort: { "_id.tahun": 1, "_id.bulan": 1 } }
+    ])
+        .toArray((err, result) => {
+            if (err) {
+                res.status(500).send({ error: 'Error finding sales in the collection' });
+            } else {
+                res.send(result);
+            } 
+        });
+});
 
-app.get('/api/sales/:id', (req, res) => {
-    const id = req.params.id;
-    db.collection('sales').findOne({ _id: ObjectId(id) }, (err, result) => {
+
+
+app.get('/api/salesg/:kode_item', (req, res) => {
+    const kode_item = req.params.kode_item;
+    console.log("1");
+    const storeId = req.session.storeId;
+    console.log("2");
+    let currentMonth = new Date().getMonth() + 1;
+    console.log("3");
+    let currentYear = new Date().getFullYear().toString();
+    console.log("4");
+    db.collection('sales').findOne({ kode_item: kode_item, storeId:storeId, bulan: currentMonth, tahun: currentYear }, (err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error finding sale in the collection' });
         } else {
@@ -316,10 +351,12 @@ app.get('/api/sales/:id', (req, res) => {
     });
 });
 
-app.put('/api/sales/:id', (req, res) => {
-    const id = req.params.id;
+app.put('/api/sales/:kode_item', (req, res) => {
+    const kode_item = req.params.kode_item;
     const updatedSale = req.body;
-    db.collection('sales').updateOne({ _id: ObjectId(id) }, { $set: updatedSale }, (err, result) => {
+    body.storeId = req.session.storeId;
+    const storeId = req.session.storeId;
+    db.collection('sales').updateOne({ kode_item: kode_item, storeId: storeId }, { $set: updatedSale }, (err, result) => {
         if (err) {
             res.status(500).send({ error: 'Error updating sale in the collection' });
         } else {
