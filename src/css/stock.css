@@ -313,7 +313,6 @@ body.dark .switch::before{
     flex-direction: column;
     text-align: center;
     
-    border: solid 0.1px #ff040480;
 }
 
 .container {
@@ -324,7 +323,6 @@ body.dark .switch::before{
     display: flex;
     flex-direction: row;
 
-    border: solid 0.1px #04ff3a80;
 }
 
 .card-border{
