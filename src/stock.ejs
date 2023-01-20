@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/stock.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Kasir Cashy</title>
+</head>
+
+<body>
+    <div class="bg">
+        <img src="./elemen/Ellipseblue1.png" alt="bg1">
+    </div>
+    <div class="bg2">
+        <img src="./elemen/Elipsblue2.png" alt="bg2">
+    </div>
+    <%- include('./navbar.ejs') %>
+    <div class="alert-box">
+        <p class="alert"></p>
+    </div>
+        <section class="home">
+            <div class="text">Stok Barang</div>
+            <div class="box-wrapper">
+                <div class="container">
+                    <div id="b1">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama Barang</th>
+                                    <th>Kode</th>
+                                    <th>Deskripsi</th>
+                                    <th>Stok</th>
+                                    <th>Harga</th>
+                                    <th>Harga Dasar</th>
+                                    <th>Kategori</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- The table rows will be added here dynamically -->
+                            </tbody>
+                        </table>
+                        <button id="add-button">Tambah Barang</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="./js/stock.js"></script>
+
+</body>
+
+</html>

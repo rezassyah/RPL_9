@@ -5,22 +5,22 @@ const form = [...document.querySelector('.main-content').children]
 form.forEach((item, i) => {
     setTimeout(() => {
         item.style.opacity = 1
-    }, i*100)
+    }, i * 100)
 })
 
 //form vallidation
 
-const nama = document.querySelector('.name') 
+const nama = document.querySelector('.name')
 const merchant = document.querySelector('.merchant')
-const email = document.querySelector('.email') 
+const email = document.querySelector('.email')
 const password = document.querySelector('.password')
 const rptpassword = document.querySelector('.rptpassword')
 const createbtn = document.querySelector('.btncreate')
 
 createbtn.addEventListener('click', () => {
-    fetch('/register-user', {
+    fetch('/api/createUser', {
         method: 'post',
-        headers: new Headers({'Content-Type': 'application/json'}),
+        headers: new Headers({ 'Content-Type': 'application/json' }),
         body: JSON.stringify({
             name: nama.value,
             merchant: merchant.value,
@@ -29,12 +29,25 @@ createbtn.addEventListener('click', () => {
             rptpassword: rptpassword.value
         })
     })
-    .then(res => res.json())
-    .then(data => {
-        if(data.name) {
-            alert('register successful')
-        } else {
-            alert(data)
-        }
-    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.acknowledged) {
+                alertBox('register successful')
+                location.href = '../login.html'
+            } else {
+                return alertBox(data)
+            }
+        })
 })
+
+
+const alertBox = (data) => {
+    const alertContainer = document.querySelector('.alert-box')
+    const alertMsg = document.querySelector('.alert')
+    alertMsg.innerHTML = data
+
+    alertContainer.style.top = `5%`
+    setTimeout(() => {
+        alertContainer.style.top = null
+    }, 5000)
+}

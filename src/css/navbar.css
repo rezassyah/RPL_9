@@ -1,0 +1,12 @@
+.nav-link-selected {
+    list-style: none;
+    height: 100%;
+    background-color: #1698D3;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}

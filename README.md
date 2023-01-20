@@ -5,7 +5,7 @@ Muhamad Syaepul Huda - 1301200227\
 Fadli Zuhri   - 1301202613
 
 ### Guide
-Base new branch from dev branch from 14 November and on.
+Base new branch from dev branch 
 \
 New style include new structure, structures you need to know : 
 - src --> source codes folder, all js html and css are inside within each respective folder
@@ -15,12 +15,12 @@ New style include new structure, structures you need to know :
 - reference --> always use `.` before `/` like `"./reference"` so reference can check if you move the repo somewhere else
 
 To access the site by code, run npm in terminal with `npm run start` \
-**NOTE THAT SITE WON'T RUN WITHOUT .ENV FILE WHICH IS POINTER TO DATABASE**
+note : install dependencies first
 \
 \
 Listed dependencies :
-` 1.dotenv 2.express 3.knex 4.mysql 5.mysql2 6.sqlite3 `
+` 1.mongodb 2.express 3.express-session 4.ejs 5.body-parser 6.cors `
 
 use `npm install dependencies` and replace dependencies with ones listed above
 \
-Note that node.modules and .env are files that are ignored by .gitignore
+node modules files are not ignored
